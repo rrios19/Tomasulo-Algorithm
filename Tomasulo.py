@@ -1,8 +1,52 @@
-#from io import open
+from io import open
 
-#codigo=open("Code.txt", "r")
-#text=codigo.readlines()
-#codigo.close()
+
+text=open("Code.txt", "r")
+codigo=text.readlines()
+text.close()
+
+
+def separar(codigo):
+    code=[]
+    code2=[]
+    op=[]
+    rd=[]
+    ra=[]
+    rb=[]
+    for i in codigo:
+        i = i.replace(" ", "")
+        code.append(i)
+
+    for i in code:
+        op.append(i[0:3])
+
+    for i in code:
+        i = i.replace(i[0:3], "")
+        code2.append(i)
+
+    codigo.clear()
+    for i in code2:
+        i = i.replace("\n", "")
+        codigo.append(i)
+
+    code.clear()
+
+    for i in codigo:
+        i = i.split(",")
+        code.append(i)
+
+    a=0
+    for i in code:
+        rd.append(code[a][0])
+        ra.append(code[a][1])
+        rb.append(code[a][2])
+        a+=1
+
+    return op, rd, ra, rb
+
+
+print(separar(codigo))
+
 
 R = [[1, "~",123457656789876567876],
     [1, "~", 2474],

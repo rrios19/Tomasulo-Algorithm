@@ -80,7 +80,7 @@ stop=False
 #--------------------------------------------------------------------
 
     
-for e in range(10):
+for e in range(20):
     
     print('------------------',e,'-----------------------')
                      
@@ -163,12 +163,12 @@ for e in range(10):
         if (AdderRS[i].Valid1 == 1 and AdderRS[i].Valid2 == 1):#Revisa si en RS hay instruccion lista para ejecutar
             copia = BloqueRS(AdderRS[i].Nombre, AdderRS[i].Valid1, AdderRS[i].Tag1, AdderRS[i].Value1, AdderRS[i].Valid2, AdderRS[i].Tag2, AdderRS[i].Value2, AdderRS[i].contCiclos)
             EjecutandoSuma.append(copia) #se agrega la copia de instruccion a una lista con las instrucciones que esperan ciclos
-            AdderRS[i].Valid1=None#El bloque de la estacion de reserva se "limpia"
+            '''AdderRS[i].Valid1=None#El bloque de la estacion de reserva se "limpia"
             AdderRS[i].Tag1=None
             AdderRS[i].Value1=None
             AdderRS[i].Valid2=None
             AdderRS[i].Tag2=None
-            AdderRS[i].Value2=None
+            AdderRS[i].Value2=None'''
         
     #----------------fetch---------------------------------------------------------------
     if CodigoEnsamblador: 

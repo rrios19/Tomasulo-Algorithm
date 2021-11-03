@@ -7,9 +7,6 @@ class Reg:
     Tag = ""
     Value = ""
 
-
-
-#hola
     def __init__(self,Nombre,Valid, Tag, Value):
         self.Nombre = Nombre
         self.Valid = Valid
@@ -83,9 +80,9 @@ stop=False
 #--------------------------------------------------------------------
 
     
-for i in range(10):
+for e in range(10):
     
-    print('------------------',i,'-----------------------')
+    print('------------------',e,'-----------------------')
                      
     #---------------------revisa si hay instrucciones de suma listas para escribir en registro y cambia los tags--------------
     if EjecutandoSuma: #se ejecuta si hay operacion de suma ejecutandose
@@ -102,10 +99,12 @@ for i in range(10):
                                  AdderRS[k].Valid2=1
                                  AdderRS[k].Tag2='~'
                                  AdderRS[k].Value2 = EjecutandoSuma[i].Value1 + EjecutandoSuma[i].Value2
-                        RAT[j].Valid= 1 #en el registro destino se actualiza bir de validez, se limpia el tag y se pone el nuevo valor
-                        RAT[j].Tag1= None
-                        RAT[j].Value = EjecutandoSuma[i].Value1 + EjecutandoSuma[i].Value2
-                        EjecutandoSuma.pop(i)                            
+                         RAT[j].Valid= 1 #en el registro destino se actualiza bir de validez, se limpia el tag y se pone el nuevo valor
+                         RAT[j].Tag1= None
+                         RAT[j].Value = EjecutandoSuma[i].Value1 + EjecutandoSuma[i].Value2
+                         EjecutandoSuma[i].contCiclos+=1
+                                                   
+                             
 
             else:
                 EjecutandoSuma[i].contCiclos+=1
@@ -114,12 +113,12 @@ for i in range(10):
     
     
             
-    #----------------Se decodifica instruccion---------------------------   
+    #--------------------Se decodifica instruccion de suma---------------------------   
     if Decodificar:
         if Decodificar[0][0] == 'ADD':
             cont=0
-            disp=0
-            pos=0
+            disp=0#si hay estacion de reserva dispnible
+            pos=0#posicion de estacion de reserva disponible
             while disp == 0 and cont<SizeRS:#ciclo revisa si hay espacio en estacion de reserva de sumas 
                 if ((AdderRS[cont].Valid1 == None and AdderRS[cont].Valid2 == None) or (AdderRS[cont].Valid1 == 1 and AdderRS[cont].Valid2 == 1)):
                     pos = cont #posicion del bloque disponible en estacion de reserva de sumas

@@ -7,6 +7,9 @@ class Reg:
     Tag = ""
     Value = ""
 
+
+
+#hola
     def __init__(self,Nombre,Valid, Tag, Value):
         self.Nombre = Nombre
         self.Valid = Valid

@@ -152,7 +152,7 @@ for e in range(15):
                         if RAT[i].Valid==1:#Revisa si registro esta listo o esta esperando un valor
                             AdderRS[pos].Valid2= RAT[i].Valid
                             AdderRS[pos].Tag2=' ~~ '
-                            AdderRS[pos].Value2 =RAT[i].Value #si registro esta listo se escribe valor de registro en operando 2 de estacion de reserva
+                            AdderRS[pos].Value2 = RAT[i].Value #si registro esta listo se escribe valor de registro en operando 2 de estacion de reserva
                         else:
                             AdderRS[pos].Valid2= 0
                             AdderRS[pos].Tag2=RAT[i].Tag#si registro no esta disponble se copia su tag en operando 2 de estacion de reserva
@@ -166,46 +166,7 @@ for e in range(15):
                 print("Estacion de reserva de sumas llena")
                 
                 
-        elif Decodificar[0][0] == 'sub':
-           cont=0
-           disp=0#si hay estacion de reserva dispnible
-           pos=0#posicion de estacion de reserva disponible
-           while disp == 0 and cont<SizeRS:#ciclo revisa si hay espacio en estacion de reserva de sumas 
-               if (AdderRS[cont].Valid1 == ' ' and AdderRS[cont].Valid2 == ' '): 
-                   pos = cont #posicion del bloque disponible en estacion de reserva de sumas
-                   disp=1
-               cont+=1
-                   
-           if disp:#proceso que empieza si hay espacio en estacion de reserva
-               for i in range(len(RAT)):
-                   if RAT[i].Nombre == Decodificar[0][2]:#busca registro de operando 1
-                       if RAT[i].Valid==1:#Revisa si registro esta listo o esta esperando un valor
-                           AdderRS[pos].Valid1= RAT[i].Valid 
-                           AdderRS[pos].Tag1=' ~~ '
-                           AdderRS[pos].Value1 = RAT[i].Value #si registro esta listo se escribe valor de registro en operando 1 de estacion de reserva
-                          
-                       else: 
-                           AdderRS[pos].Valid1= 0
-                           AdderRS[pos].Tag1=RAT[i].Tag  #si registro no esta disponible se copia su tag en operando 1 de estacion de reserva
-                           
-                           
-                   
-                   if RAT[i].Nombre == Decodificar[0][3]:#busca registro de operando 2
-                       if RAT[i].Valid==1:#Revisa si registro esta listo o esta esperando un valor
-                           AdderRS[pos].Valid2= RAT[i].Valid
-                           AdderRS[pos].Tag2=' ~~ '
-                           AdderRS[pos].Value2 =-RAT[i].Value #si registro esta listo se escribe valor de registro en operando 2 de estacion de reserva
-                       else:
-                           AdderRS[pos].Valid2= 0
-                           AdderRS[pos].Tag2=RAT[i].Tag#si registro no esta disponble se copia su tag en operando 2 de estacion de reserva
-                           
-                           
-                   if RAT[i].Nombre == Decodificar[0][1]:#Se busca registro destino 
-                       RAT[i].Valid=0 #
-                       RAT[i].Tag = AdderRS[pos].Nombre #se cambia su tag por el nombre de la estacion de reserva de la que esta esperando dato 
-               Decodificar.pop(0)
-           else:
-               print("Estacion de reserva de sumas llena")       
+            
         
             
     

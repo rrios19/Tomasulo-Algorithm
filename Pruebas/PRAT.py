@@ -37,7 +37,7 @@ def print_res(AdderRS,SizeRS):
             t=len(str(R[i][3]))-5
     print("                 ")
     print("                 RS suma ")
-    print("-----------------------------------------")
+    print("    ------------------------------------")
     print("    |     Source 1    |     Source 2    |")
     print("-----------------------------------------")
     print("| N | V | Tag | Value"+" "*t+" | V | Tag | Value"+" "*t+" |")

@@ -120,18 +120,6 @@ for e in range(18):
             
         
                         
-                        
-                        
-
-                        
-                        
-                
-    
-  
-                
-        
-    
-    
             
     #--------------------Se decodifica instruccion de suma---------------------------   
     if Decodificar:

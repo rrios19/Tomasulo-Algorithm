@@ -1,4 +1,4 @@
-f = open("prueba.txt",'r')
+f = open("Code.txt",'r')
 ins=[]
 ins2=[]
 for w in f:

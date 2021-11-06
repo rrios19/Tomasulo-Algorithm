@@ -73,6 +73,7 @@ for i in range(SizeRS):
 
 
 EjecutandoSuma=[]#almacena instrucciones que estan esperando a cumplir ciclos
+EjecutandoMulti=[]
 CodigoEnsamblador= [['ADD','R3','R1','R2'],['ADD','R5','R3','R4'],['ADD','R7','R2','R6'],['ADD','R10','R8','R9'],['ADD','R11','R7','R10'],['ADD','R5','R11','R5']]#lista de instrucciones obtenidas del archivo de texto
 Decodificar = [] #almacena instruccion a la que se le hace fetch y esta lista para decodificar, ej: ADD, Rd, R1, R2
 clock=0
@@ -91,7 +92,7 @@ for e in range(20):
                 for j in range(len(RAT)):
                      if EjecutandoSuma[i].Nombre == RAT[j].Tag:#se ejecuta cuando se encuentra el registro destino de la instruccion
                          for k in range(SizeRS): #este ciclo revisa si hay estaciones de reserva esperando por el resultado 
-                             if RAT[j].Tag==AdderRS[i].Tag1:#si se encuentra operando1 de intruccion esperando por el resultado en estacion de reserva, se actualiza su bir de validez, tag y value
+                             if RAT[j].Tag==AdderRS[i].Tag1:#si se encuentra operando1 de intruccion esperando por el resultado en estacion de reserva, se actualiza su bit de validez, tag y value
                                  AdderRS[k].Valid1=1
                                  AdderRS[k].Tag1='~'
                                  AdderRS[k].Value1 = EjecutandoSuma[i].Value1 + EjecutandoSuma[i].Value2
@@ -110,7 +111,29 @@ for e in range(20):
                 EjecutandoSuma[i].contCiclos+=1
                 
         
-    
+    if EjecutandoMulti: #se ejecuta si hay operacion de suma ejecutandose
+         for i in range(len(EjecutandoMulti)):
+            if EjecutandoMulti[i].contCiclos == 4: #se ejecuta si instruccion de suma cumplio ciclos necesarios
+                for j in range(len(RAT)):
+                     if EjecutandoMulti[i].Nombre == RAT[j].Tag:#se ejecuta cuando se encuentra el registro destino de la instruccion
+                         for k in range(SizeRS): #este ciclo revisa si hay estaciones de reserva esperando por el resultado 
+                             if RAT[j].Tag==AdderRS[i].Tag1:#si se encuentra operando1 de intruccion esperando por el resultado en estacion de reserva, se actualiza su bit de validez, tag y value
+                                 AdderRS[k].Valid1=1
+                                 AdderRS[k].Tag1='~'
+                                 AdderRS[k].Value1 = EjecutandoMulti[i].Value1 + EjecutandoMulti[i].Value2
+                             if RAT[j].Tag==AdderRS[i].Tag2:#si se encuentra operando2 de intruccion esperando por el resultado en estacion de reserva, se actualiza su bir de validez, tag y value
+                                 AdderRS[k].Valid2=1
+                                 AdderRS[k].Tag2='~'
+                                 AdderRS[k].Value2 = EjecutandoSuma[i].Value1 + EjecutandoSuma[i].Value2
+                         RAT[j].Valid= 1 #en el registro destino se actualiza bir de validez, se limpia el tag y se pone el nuevo valor
+                         RAT[j].Tag1= None
+                         RAT[j].Value = EjecutandoSuma[i].Value1 + EjecutandoSuma[i].Value2
+                         EjecutandoSuma[i].contCiclos+=1
+                                                   
+                             
+
+            else:
+                EjecutandoSuma[i].contCiclos+=1
     
             
     #--------------------Se decodifica instruccion de suma---------------------------   
@@ -178,28 +201,4 @@ for e in range(20):
         print(RAT[i].Nombre, RAT[i].Tag, RAT[i].Value)
     for i in range(SizeRS):
         print(AdderRS[i].Nombre, AdderRS[i].Valid1, AdderRS[i].Tag1, AdderRS[i].Value1, AdderRS[i].Valid2, AdderRS[i].Tag2, AdderRS[i].Value2)
-
-    
-                    
-                    
-                
-                
-                
-            
-        
-        
-    
-            
-            
-        
-    
-            
-            
-            
-            
-
-
-
-
-
 

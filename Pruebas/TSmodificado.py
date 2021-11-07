@@ -107,18 +107,17 @@ for i in range(SizeRS):
     cont+=1
 
 
-EjecutandoSuma=[]#almacena instrucciones que estan esperando a cumplir ciclos
+
 CodigoEnsamblador,c=cod("prueba.txt") #lista de instrucciones obtenidas del archivo de texto
 Decodificar = [] #almacena instruccion a la que se le hace fetch y esta lista para decodificar, ej: ADD, Rd, R1, R2
-clock=0
+clock=1
 stop=False
 #--------------------------------------------------------------------
 
     
-for e in range(25):
-    print('------------------',e+1,'-----------------------')
-    for i in Decodificar:
-        print(i)
+while True:
+    
+    print('------------------',clock,'-----------------------')
                      
     #---------------------revisa si hay instrucciones de suma listas para escribir en registro y cambia los tags--------------
     for j in AdderRS:
@@ -155,24 +154,29 @@ for e in range(25):
                         j.Tag2=" ~~ "
                         j.Value2='  '
                         j.contCiclos=0
+                
                 for p in AdderRS:
+                    igual= False
+                    if p.Tag1 == p.Tag2:
+                        igual = True
                     if p.Tag1 == j.Nombre:
                         p.Value1= j.Value1+j.Value2
                         p.Valid1=1
                         p.Tag1=" ~~ "
                         
-                        j.Valid1=' '
-                        j.Tag1=" ~~ "
-                        j.Value1='  '
-                        j.Valid2=' '
-                        j.Tag2=" ~~ "
-                        j.Value2='  '
-                        j.contCiclos=0
+                        if not igual: 
+                            j.Valid1=' '
+                            j.Tag1=" ~~ "
+                            j.Value1='  '
+                            j.Valid2=' '
+                            j.Tag2=" ~~ "
+                            j.Value2='  '
+                            j.contCiclos=0
                     if p.Tag2 == j.Nombre:
                         p.Value2= j.Value1+j.Value2
                         p.Valid2=1
                         p.Tag2=" ~~ "
-
+                    
                         j.Valid1=' '
                         j.Tag1=" ~~ "
                         j.Value1='  '
@@ -180,20 +184,23 @@ for e in range(25):
                         j.Tag2=" ~~ "
                         j.Value2='  '
                         j.contCiclos=0
-                        
+                #------------------------      
                 for p in MulRS:
+                    igual= False
+                    if p.Tag1M == p.Tag2M:
+                        igual = True
                     if p.Tag1M == j.Nombre:
                         p.Value1M= j.Value1+j.Value2
                         p.Valid1M=1
                         p.Tag1M=" ~~ "
-                        
-                        j.Valid1=' '
-                        j.Tag1=" ~~ "
-                        j.Value1='  '
-                        j.Valid2=' '
-                        j.Tag2=" ~~ "
-                        j.Value2='  '
-                        j.contCiclos=0
+                        if not igual:
+                            j.Valid1=' '
+                            j.Tag1=" ~~ "
+                            j.Value1='  '
+                            j.Valid2=' '
+                            j.Tag2=" ~~ "
+                            j.Value2='  '
+                            j.contCiclos=0
                     if p.Tag2M == j.Nombre:
                         p.Value2M= j.Value1+j.Value2
                         p.Valid2M=1
@@ -248,18 +255,22 @@ for e in range(25):
                         j.Value2M='  '
                         j.contCiclosM=0
                 for p in MulRS:
+                    igual = False
+                    if p.Tag1M==Tag2M:
+                        igual=True
+                        
                     if p.Tag1M == j.NombreM:
                         p.Value1M= j.Value1M*j.Value2M
                         p.Valid1M=1
                         p.Tag1M=" ~~ "
-                        
-                        j.Valid1M=' '
-                        j.Tag1M=" ~~ "
-                        j.Value1M='  '
-                        j.Valid2M=' '
-                        j.Tag2M=" ~~ "
-                        j.Value2M='  '
-                        j.contCiclosM=0
+                        if not igual:
+                            j.Valid1M=' '
+                            j.Tag1M=" ~~ "
+                            j.Value1M='  '
+                            j.Valid2M=' '
+                            j.Tag2M=" ~~ "
+                            j.Value2M='  '
+                            j.contCiclosM=0
                     if p.Tag2M == j.NombreM:
                         p.Value2M= j.Value1M*j.Value2M
                         p.Valid2M=1
@@ -274,18 +285,23 @@ for e in range(25):
                         j.contCiclosM=0
 
                 for p in AdderRS:
+                    igual = False
+                    if p.Tag1==p.Tag2:
+                        igual= True
+                        
                     if p.Tag1 == j.NombreM:
                         p.Value1= j.Value1M*j.Value2M
                         p.Valid1=1
                         p.Tag1=" ~~ "
                         
-                        j.Valid1M=' '
-                        j.Tag1M=" ~~ "
-                        j.Value1M='  '
-                        j.Valid2M=' '
-                        j.Tag2M=" ~~ "
-                        j.Value2M='  '
-                        j.contCiclosM=0
+                        if not igual:
+                            j.Valid1M=' '
+                            j.Tag1M=" ~~ "
+                            j.Value1M='  '
+                            j.Valid2M=' '
+                            j.Tag2M=" ~~ "
+                            j.Value2M='  '
+                            j.contCiclosM=0
                     if p.Tag2 == j.NombreM:
                         p.Value2= j.Value1M*j.Value2M
                         p.Valid2=1
@@ -410,4 +426,15 @@ for e in range(25):
     print_RAT(RAT)
     print_res(AdderRS,SizeRS,"suma")
     print_res(MulRS,SizeRS,"multiplicación")
+  
+    validos=0
+    
+    for i in RAT:
+        if i.Valid == 1:
+            validos+=1
+    if validos == 12 and CodigoEnsamblador == []:
+        print("Simulacion terminada en ", clock, " ciclos")
+        break
+    clock+=1
+        
     

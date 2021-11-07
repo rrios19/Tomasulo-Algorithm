@@ -136,12 +136,7 @@ for e in range(20):
                         j.Value2=None
                         j.contCiclos=0
 
-
-                
-    
-                        
-                j.contCiclos+=1
-                    
+                j.contCiclos+=1  
             else:
                 j.contCiclos+=1
                 

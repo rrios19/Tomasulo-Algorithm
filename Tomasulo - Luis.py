@@ -72,7 +72,7 @@ for i in range(SizeRS):
 
 
 
-EjecutandoSuma=[]#almacena instrucciones que estan esperando a cumplir ciclos
+
 CodigoEnsamblador= [['ADD','R3','R1','R2'],['ADD','R5','R9','R3'],['ADD','R7','R2','R6'],['ADD','R10','R8','R9'],['ADD','R11','R7','R10'],['ADD','R5','R11','R5']]#lista de instrucciones obtenidas del archivo de texto
 Decodificar = [] #almacena instruccion a la que se le hace fetch y esta lista para decodificar, ej: ADD, Rd, R1, R2
 clock=0
@@ -110,6 +110,36 @@ for e in range(20):
                         j.Tag2=None
                         j.Value2=None
                         j.contCiclos=0
+                for p in AdderRS:
+                    if p.Tag1 == j.Nombre:
+                        p.Value1= j.Value1+j.Value2
+                        p.Valid1=1
+                        p.Tag1="~"
+                        
+                        j.Valid1=None
+                        j.Tag1=None
+                        j.Value1=None
+                        j.Valid2=None
+                        j.Tag2=None
+                        j.Value2=None
+                        j.contCiclos=0
+                    if p.Tag2 == j.Nombre:
+                        p.Value2= j.Value1+j.Value2
+                        p.Valid2=1
+                        p.Tag2="~"
+
+                        j.Valid1=None
+                        j.Tag1=None
+                        j.Value1=None
+                        j.Valid2=None
+                        j.Tag2=None
+                        j.Value2=None
+                        j.contCiclos=0
+
+
+                
+    
+                        
                 j.contCiclos+=1
                     
             else:
@@ -124,10 +154,11 @@ for e in range(20):
             
     #--------------------Se decodifica instruccion de suma---------------------------   
     if Decodificar:
-        if Decodificar[0][0] == 'ADD':
+        if (Decodificar[0][0] == 'ADD'):
             cont=0
             disp=0#si hay estacion de reserva dispnible
             pos=0#posicion de estacion de reserva disponible
+                        
             while disp == 0 and cont<SizeRS:#ciclo revisa si hay espacio en estacion de reserva de sumas 
                 if (AdderRS[cont].Valid1 == None and AdderRS[cont].Valid2 == None): 
                     pos = cont #posicion del bloque disponible en estacion de reserva de sumas

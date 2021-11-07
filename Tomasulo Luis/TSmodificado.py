@@ -8,7 +8,7 @@ from Código import cod
 from PRAT import print_RAT
 from PRAT import print_res
 
-SizeRS=10
+SizeRS=4
 
 
 #------Prueba usando clases---------

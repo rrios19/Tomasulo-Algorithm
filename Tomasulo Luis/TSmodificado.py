@@ -8,7 +8,7 @@ from Código import cod
 from PRAT import print_RAT
 from PRAT import print_res
 
-SizeRS=4
+SizeRS=10
 
 
 #------Prueba usando clases---------
@@ -123,10 +123,7 @@ while True:
         for i in Decodificar:
             if i!=[]:
                 print("operacion: ")
-                print(i)
-    print_RAT(RAT)
-    print_res(AdderRS,SizeRS,"suma")
-    print_res(MulRS,SizeRS,"multiplicación")                     
+                print(i)                    
     #---------------------revisa si hay instrucciones de suma listas para escribir en registro y cambia los tags--------------
     EjecutarSuma = []
     EjecutarMul = []
@@ -427,6 +424,9 @@ while True:
         fetch = CodigoEnsamblador.pop(0)
         Decodificar.append(fetch)
 
+    print_RAT(RAT)
+    print_res(AdderRS,SizeRS,"suma")
+    print_res(MulRS,SizeRS,"multiplicación") 
   
     validos=0
     

@@ -91,7 +91,7 @@ for i in range(SizeRS):
     AdderRS.append(Bloque)
     cont+=1
 #-----Creacion de RS de multiplicación---
-AdderRSM=[]
+MulRS=[]
 cont=1
 for i in range(SizeRS):
     NombreM = 'B' + str(cont)
@@ -103,7 +103,7 @@ for i in range(SizeRS):
     Value2M='  '
     contCiclosM=0
     BloqueM=BloqueRSM(NombreM,Valid1M, Tag1M, Value1M, Valid2M, Tag2M, Value2M, contCiclosM)
-    AdderRSM.append(BloqueM)
+    MulRS.append(BloqueM)
     cont+=1
 
 
@@ -175,13 +175,13 @@ for e in range(25):
                 j.contCiclos+=1  
             else:
                 j.contCiclos+=1
-                
-    for j in AdderRSM:
+    #-------Para multiplicacion            
+    for j in MulRS:
         if (j.Valid1M==1 and j.Valid2M==1):
             if j.contCiclosM==6:
                 for k in RAT:
                     if j.NombreM==k.Tag:
-                        for m in AdderRSM:
+                        for m in MulRS:
                             if m.Tag1M == k.Tag:
                                 m.Value1M= j.Value1M*j.Value2M
                                 m.Valid1M=1
@@ -201,7 +201,7 @@ for e in range(25):
                         j.Tag2M=" ~~ "
                         j.Value2M='  '
                         j.contCiclosM=0
-                for p in AdderRSM:
+                for p in MulRS:
                     if p.Tag1M == j.NombreM:
                         p.Value1M= j.Value1M*j.Value2M
                         p.Valid1M=1
@@ -289,7 +289,7 @@ for e in range(25):
             disp=0#si hay estacion de reserva dispnible
             pos=0#posicion de estacion de reserva disponible
             while disp == 0 and cont<SizeRS:#ciclo revisa si hay espacio en estacion de reserva de sumas 
-                if (AdderRSM[cont].Valid1M == ' ' and AdderRSM[cont].Valid2M == ' '): 
+                if (MulRS[cont].Valid1M == ' ' and MulRS[cont].Valid2M == ' '): 
                     pos = cont #posicion del bloque disponible en estacion de reserva de sumas
                     disp=1
                 cont+=1
@@ -298,29 +298,29 @@ for e in range(25):
                 for i in range(len(RAT)):
                     if RAT[i].Nombre == Decodificar[0][2]:#busca registro de operando 1
                         if RAT[i].Valid==1:#Revisa si registro esta listo o esta esperando un valor
-                            AdderRSM[pos].Valid1M= RAT[i].Valid 
-                            AdderRSM[pos].Tag1M=' ~~ '
-                            AdderRSM[pos].Value1M = RAT[i].Value #si registro esta listo se escribe valor de registro en operando 1 de estacion de reserva
+                            MulRS[pos].Valid1M= RAT[i].Valid 
+                            MulRS[pos].Tag1M=' ~~ '
+                            MulRS[pos].Value1M = RAT[i].Value #si registro esta listo se escribe valor de registro en operando 1 de estacion de reserva
                            
                         else: 
-                            AdderRSM[pos].Valid1M=0
-                            AdderRSM[pos].Tag1M=RAT[i].Tag  #si registro no esta disponible se copia su tag en operando 1 de estacion de reserva
+                            MulRS[pos].Valid1M=0
+                            MulRS[pos].Tag1M=RAT[i].Tag  #si registro no esta disponible se copia su tag en operando 1 de estacion de reserva
                             
                             
                     
                     if RAT[i].Nombre == Decodificar[0][3]:#busca registro de operando 2
                         if RAT[i].Valid==1:#Revisa si registro esta listo o esta esperando un valor
-                            AdderRSM[pos].Valid2M= RAT[i].Valid
-                            AdderRSM[pos].Tag2M=' ~~ '
-                            AdderRSM[pos].Value2M = RAT[i].Value #si registro esta listo se escribe valor de registro en operando 2 de estacion de reserva
+                            MulRS[pos].Valid2M= RAT[i].Valid
+                            MulRS[pos].Tag2M=' ~~ '
+                            MulRS[pos].Value2M = RAT[i].Value #si registro esta listo se escribe valor de registro en operando 2 de estacion de reserva
                         else:
-                            AdderRSM[pos].Valid2M= 0
-                            AdderRSM[pos].Tag2M=RAT[i].Tag#si registro no esta disponble se copia su tag en operando 2 de estacion de reserva
+                            MulRS[pos].Valid2M= 0
+                            MulRS[pos].Tag2M=RAT[i].Tag#si registro no esta disponble se copia su tag en operando 2 de estacion de reserva
                             
                             
                     if RAT[i].Nombre == Decodificar[0][1]:#Se busca registro destino 
                         RAT[i].Valid=0 #
-                        RAT[i].Tag = AdderRSM[pos].NombreM #se cambia su tag por el nombre de la estacion de reserva de la que esta esperando dato 
+                        RAT[i].Tag = MulRS[pos].NombreM #se cambia su tag por el nombre de la estacion de reserva de la que esta esperando dato 
                 Decodificar.pop(0)
             else:
                 print("Estacion de reserva de multiplicaciones llena")
@@ -337,5 +337,5 @@ for e in range(25):
                 print(i)
     print_RAT(RAT)
     print_res(AdderRS,SizeRS,"suma")
-    print_res(AdderRSM,SizeRS,"multiplicación")
+    print_res(MulRS,SizeRS,"multiplicación")
     

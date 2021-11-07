@@ -25,18 +25,21 @@ def print_RAT(RAT):
 """R2=[[1, '..', 1], [1, '..', 2], [1, '..', 3], [1, '..', 4], [1, '..', 5], [1, '..', 6], [1, '..', 7], [1, '..', 8], [1, '..', 9], [1, '..', 10], [1, '..', 11], [1, '..', 12]]
 print_RAT(R2)"""
 
-def print_res(AdderRS,SizeRS):
+def print_res(AdderRS,SizeRS,a):
     R=[]
-
     for u in range(SizeRS):
-        rr=[AdderRS[u].Nombre, AdderRS[u].Valid1, AdderRS[u].Tag1, AdderRS[u].Value1, AdderRS[u].Valid2, AdderRS[u].Tag2, AdderRS[u].Value2, AdderRS[u].contCiclos]
-        R.append(rr)
+        if a == "suma":
+            rr=[AdderRS[u].Nombre, AdderRS[u].Valid1, AdderRS[u].Tag1, AdderRS[u].Value1, AdderRS[u].Valid2, AdderRS[u].Tag2, AdderRS[u].Value2, AdderRS[u].contCiclos]
+            R.append(rr)
+        else:
+            rr=[AdderRS[u].NombreM, AdderRS[u].Valid1M, AdderRS[u].Tag1M, AdderRS[u].Value1M, AdderRS[u].Valid2M, AdderRS[u].Tag2M, AdderRS[u].Value2M, AdderRS[u].contCiclosM]
+            R.append(rr)
     t=0
     for i in range(len(R)):
         if len(str(R[i][2]))>5 and len(str(R[i][2]))>t:
             t=len(str(R[i][3]))-5
     print("                 ")
-    print("                 RS suma ")
+    print("                 RS "+a)
     print("    ------------------------------------")
     print("    |     Source 1    |     Source 2    |")
     print("-----------------------------------------")

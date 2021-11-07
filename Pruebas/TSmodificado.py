@@ -130,10 +130,11 @@ for e in range(25):
                             if m.Tag1 == k.Tag:
                                 m.Value1= j.Value1+j.Value2
                                 m.Valid1=1
-                                m.Tag1=" ~~ "
+                                m.Tag1="~"
+                            if m.Tag2 == k.Tag:
                                 m.Value2= j.Value1+j.Value2
                                 m.Valid2=1
-                                m.Tag2=" ~~ "
+                                m.Tag2="~"
                         k.Valid=1       
                         k.Tag='..'
                         k.Value=j.Value1+j.Value2
@@ -145,10 +146,36 @@ for e in range(25):
                         j.Tag2=" ~~ "
                         j.Value2='  '
                         j.contCiclos=0
-                j.contCiclos+=1
-                    
+                for p in AdderRS:
+                    if p.Tag1 == j.Nombre:
+                        p.Value1= j.Value1M+j.Value2M
+                        p.Valid1=1
+                        p.Tag1="~"
+                        
+                        j.Valid1=' '
+                        j.Tag1=" ~~ "
+                        j.Value1='  '
+                        j.Valid2=' '
+                        j.Tag2=" ~~ "
+                        j.Value2='  '
+                        j.contCiclos=0
+                    if p.Tag2 == j.Nombre:
+                        p.Value2= j.Value1M+j.Value2M
+                        p.Valid2=1
+                        p.Tag2="~"
+
+                        j.Valid1=' '
+                        j.Tag1=" ~~ "
+                        j.Value1='  '
+                        j.Valid2=' '
+                        j.Tag2=" ~~ "
+                        j.Value2='  '
+                        j.contCiclos=0
+
+                j.contCiclos+=1  
             else:
                 j.contCiclos+=1
+                
     for j in AdderRSM:
         if (j.Valid1M==1 and j.Valid2M==1):
             if j.contCiclosM==6:
@@ -156,15 +183,16 @@ for e in range(25):
                     if j.NombreM==k.Tag:
                         for m in AdderRSM:
                             if m.Tag1M == k.Tag:
-                                m.Value1M= j.Value1M*j.Value2M
+                                m.Value1M= j.Value1M+j.Value2M
                                 m.Valid1M=1
-                                m.Tag1M=" ~~ "
-                                m.Value2M= j.Value1M*j.Value2M
+                                m.Tag1M="~"
+                            if m.Tag2M == k.Tag:
+                                m.Value2M= j.Value1M+j.Value2M
                                 m.Valid2M=1
-                                m.Tag2M=" ~~ "
+                                m.Tag2M="~"
                         k.Valid=1       
                         k.Tag='..'
-                        k.Value=j.Value1M*j.Value2M
+                        k.Value=j.Value1M+j.Value2M
                         #Se vacia estacion de reserva
                         j.Valid1M=' '
                         j.Tag1M=" ~~ "
@@ -173,8 +201,33 @@ for e in range(25):
                         j.Tag2M=" ~~ "
                         j.Value2M='  '
                         j.contCiclosM=0
-                j.contCiclosM+=1
-                    
+                for p in AdderRSM:
+                    if p.Tag1M == j.NombreM:
+                        p.Value1M= j.Value1M+j.Value2M
+                        p.Valid1M=1
+                        p.Tag1M="~"
+                        
+                        j.Valid1M=' '
+                        j.Tag1M=" ~~ "
+                        j.Value1M='  '
+                        j.Valid2M=' '
+                        j.Tag2M=" ~~ "
+                        j.Value2M='  '
+                        j.contCiclosM=0
+                    if p.Tag2M == j.NombreM:
+                        p.Value2M= j.Value1M+j.Value2M
+                        p.Valid2M=1
+                        p.Tag2M="~"
+
+                        j.Valid1M=' '
+                        j.Tag1M=" ~~ "
+                        j.Value1M='  '
+                        j.Valid2M=' '
+                        j.Tag2M=" ~~ "
+                        j.Value2M='  '
+                        j.contCiclosM=0
+
+                j.contCiclosM+=1  
             else:
                 j.contCiclosM+=1
                 

@@ -1,4 +1,4 @@
-SizeRS=4
+SizeRS=2
 #------Prueba usando clases---------
 class Reg:
     #Atributos 

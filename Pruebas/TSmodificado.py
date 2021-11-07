@@ -116,7 +116,7 @@ stop=False
 
     
 for e in range(25):
-    print('------------------',e,'-----------------------')
+    print('------------------',e+1,'-----------------------')
     for i in Decodificar:
         print(i)
                      
@@ -183,16 +183,16 @@ for e in range(25):
                     if j.NombreM==k.Tag:
                         for m in AdderRSM:
                             if m.Tag1M == k.Tag:
-                                m.Value1M= j.Value1M+j.Value2M
+                                m.Value1M= j.Value1M*j.Value2M
                                 m.Valid1M=1
                                 m.Tag1M="~"
                             if m.Tag2M == k.Tag:
-                                m.Value2M= j.Value1M+j.Value2M
+                                m.Value2M= j.Value1M*j.Value2M
                                 m.Valid2M=1
                                 m.Tag2M="~"
                         k.Valid=1       
                         k.Tag='..'
-                        k.Value=j.Value1M+j.Value2M
+                        k.Value=j.Value1M*j.Value2M
                         #Se vacia estacion de reserva
                         j.Valid1M=' '
                         j.Tag1M=" ~~ "
@@ -203,7 +203,7 @@ for e in range(25):
                         j.contCiclosM=0
                 for p in AdderRSM:
                     if p.Tag1M == j.NombreM:
-                        p.Value1M= j.Value1M+j.Value2M
+                        p.Value1M= j.Value1M*j.Value2M
                         p.Valid1M=1
                         p.Tag1M="~"
                         
@@ -215,7 +215,7 @@ for e in range(25):
                         j.Value2M='  '
                         j.contCiclosM=0
                     if p.Tag2M == j.NombreM:
-                        p.Value2M= j.Value1M+j.Value2M
+                        p.Value2M= j.Value1M*j.Value2M
                         p.Valid2M=1
                         p.Tag2M="~"
 

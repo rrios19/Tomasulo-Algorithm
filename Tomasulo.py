@@ -111,10 +111,8 @@ for i in range(SizeRS):
 CodigoEnsamblador,c=cod("Code.txt") #lista de instrucciones obtenidas del archivo de texto
 Decodificar = [] #almacena instruccion a la que se le hace fetch y esta lista para decodificar, ej: ADD, Rd, R1, R2
 clock=1
-stop=False
 #--------------------------------------------------------------------
-EjecutarSuma = []
-EjecutarMul = []
+
     
 while True:
     clk=str(clock)
@@ -355,13 +353,7 @@ while True:
             else:
                 print("Estacion de reserva de multiplicaciones llena")
                 
-    """ 
-    #----------------fetch---------------------------------------------------------------
-    if CodigoEnsamblador: 
-        fetch = CodigoEnsamblador.pop(0)
-        Decodificar.append(fetch)
-    """
-  
+
     validos=0
     print_RAT(RAT)
     print_res(AdderRS,SizeRS,"suma")
@@ -376,7 +368,7 @@ while True:
         print("  ")
         print("************************************************"+"*"*f) 
         print("*                                              "+" "*f+"*")
-        print("*     Simulación finalizada en ", clock, " ciclos     *")
+        print("*     Simulación finalizada en", clock, "ciclos     *")
         print("*                                              "+" "*f+"*")
         print("************************************************"+"*"*f)
         input("Presione para salir")

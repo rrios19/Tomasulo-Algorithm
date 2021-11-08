@@ -119,11 +119,7 @@ EjecutarMul = []
 while True:
     
     print('------------------',clock,'-----------------------')
-    if Decodificar:
-        for i in Decodificar:
-            if i!=[]:
-                print("operacion: ")
-                print(i)                    
+                     
     #---------------------revisa si hay instrucciones de suma listas para escribir en registro y cambia los tags--------------
     EjecutarSuma = []
     EjecutarMul = []
@@ -133,7 +129,7 @@ while True:
     for v in MulRS:
         if (v.Valid1M==1 and v.Valid2M==1): 
             EjecutarMul.append(v)
-            
+
     for j in EjecutarSuma:
         if j.contCiclos==4:
             for k in RAT:
@@ -159,177 +155,106 @@ while True:
                     k.Valid=1       
                     k.Tag='..'
                     k.Value=j.Value1+j.Value2
-                    #Se vacia estacion de reserva
-                    j.Valid1=' '
-                    j.Tag1=" ~~ "
-                    j.Value1='  '
-                    j.Valid2=' '
-                    j.Tag2=" ~~ "
-                    j.Value2='  '
-                    j.contCiclos=0
             
             for p in AdderRS:
-                igual= False
-                if p.Tag1 == p.Tag2:
-                    igual = True
                 if p.Tag1 == j.Nombre:
                     p.Value1= j.Value1+j.Value2
                     p.Valid1=1
                     p.Tag1=" ~~ "
-                    
-                    if not igual: 
-                        j.Valid1=' '
-                        j.Tag1=" ~~ "
-                        j.Value1='  '
-                        j.Valid2=' '
-                        j.Tag2=" ~~ "
-                        j.Value2='  '
-                        j.contCiclos=0
+
                 if p.Tag2 == j.Nombre:
                     p.Value2= j.Value1+j.Value2
                     p.Valid2=1
                     p.Tag2=" ~~ "
                 
-                    j.Valid1=' '
-                    j.Tag1=" ~~ "
-                    j.Value1='  '
-                    j.Valid2=' '
-                    j.Tag2=" ~~ "
-                    j.Value2='  '
-                    j.contCiclos=0
-            #------------------------      
+            #------------------------    
             for p in MulRS:
-                igual= False
-                if p.Tag1M == p.Tag2M:
-                    igual = True
+
                 if p.Tag1M == j.Nombre:
                     p.Value1M= j.Value1+j.Value2
                     p.Valid1M=1
                     p.Tag1M=" ~~ "
-                    if not igual:
-                        j.Valid1=' '
-                        j.Tag1=" ~~ "
-                        j.Value1='  '
-                        j.Valid2=' '
-                        j.Tag2=" ~~ "
-                        j.Value2='  '
-                        j.contCiclos=0
+                    check = True
+
                 if p.Tag2M == j.Nombre:
                     p.Value2M= j.Value1+j.Value2
                     p.Valid2M=1
                     p.Tag2M=" ~~ "
+                    check = True
+            #se vacia estacion de reserva de la instruccion que se escribio
+            j.Valid1=' '
+            j.Tag1=" ~~ "
+            j.Value1='  '
+            j.Valid2=' '
+            j.Tag2=" ~~ "
+            j.Value2='  '
+            j.contCiclos=0
 
-                    j.Valid1=' '
-                    j.Tag1=" ~~ "
-                    j.Value1='  '
-                    j.Valid2=' '
-                    j.Tag2=" ~~ "
-                    j.Value2='  '
-                    j.contCiclos=0
+
 
     #-------Para multiplicacion            
     for j in EjecutarMul:
-        if (j.Valid1M==1 and j.Valid2M==1):
-            if j.contCiclosM==6:
-                for k in RAT:
-                    if j.NombreM==k.Tag:
-                        for m in MulRS:
-                            if m.Tag1M == k.Tag:
-                                m.Value1M= j.Value1M*j.Value2M
-                                m.Valid1M=1
-                                m.Tag1M=" ~~ "
-                            if m.Tag2M == k.Tag:
-                                m.Value2M= j.Value1M*j.Value2M
-                                m.Valid2M=1
-                                m.Tag2M=" ~~ "
+        if j.contCiclosM==6:
+            for k in RAT:
+                if j.NombreM==k.Tag:
+                    for m in MulRS:
+                        if m.Tag1M == k.Tag:
+                            m.Value1M= j.Value1M*j.Value2M
+                            m.Valid1M=1
+                            m.Tag1M=" ~~ "
+                        if m.Tag2M == k.Tag:
+                            m.Value2M= j.Value1M*j.Value2M
+                            m.Valid2M=1
+                            m.Tag2M=" ~~ "
 
-                        for m in AdderRS:
-                            if m.Tag1 == k.Tag:
-                                m.Value1= j.Value1M*j.Value2M
-                                m.Valid1=1
-                                m.Tag1=" ~~ "
-                            if m.Tag2 == k.Tag:
-                                m.Value2= j.Value1M*j.Value2M
-                                m.Valid2=1
-                                m.Tag2=" ~~ "
-                        k.Valid=1       
-                        k.Tag='..'
-                        k.Value=j.Value1M*j.Value2M
-                        #Se vacia estacion de reserva
-                        j.Valid1M=' '
-                        j.Tag1M=" ~~ "
-                        j.Value1M='  '
-                        j.Valid2M=' '
-                        j.Tag2M=" ~~ "
-                        j.Value2M='  '
-                        j.contCiclosM=0
-                for p in MulRS:
-                    igual = False
-                    if p.Tag1M==Tag2M:
-                        igual=True
-                        
-                    if p.Tag1M == j.NombreM:
-                        p.Value1M= j.Value1M*j.Value2M
-                        p.Valid1M=1
-                        p.Tag1M=" ~~ "
-                        if not igual:
-                            j.Valid1M=' '
-                            j.Tag1M=" ~~ "
-                            j.Value1M='  '
-                            j.Valid2M=' '
-                            j.Tag2M=" ~~ "
-                            j.Value2M='  '
-                            j.contCiclosM=0
-                    if p.Tag2M == j.NombreM:
-                        p.Value2M= j.Value1M*j.Value2M
-                        p.Valid2M=1
-                        p.Tag2M=" ~~ "
+                    for m in AdderRS:
+                        if m.Tag1 == k.Tag:
+                            m.Value1= j.Value1M*j.Value2M
+                            m.Valid1=1
+                            m.Tag1=" ~~ "
+                        if m.Tag2 == k.Tag:
+                            m.Value2= j.Value1M*j.Value2M
+                            m.Valid2=1
+                            m.Tag2=" ~~ "
+                    k.Valid=1       
+                    k.Tag='..'
+                    k.Value=j.Value1M*j.Value2M
 
-                        j.Valid1M=' '
-                        j.Tag1M=" ~~ "
-                        j.Value1M='  '
-                        j.Valid2M=' '
-                        j.Tag2M=" ~~ "
-                        j.Value2M='  '
-                        j.contCiclosM=0
 
-                for p in AdderRS:
-                    igual = False
-                    if p.Tag1==p.Tag2:
-                        igual= True
-                        
-                    if p.Tag1 == j.NombreM:
-                        p.Value1= j.Value1M*j.Value2M
-                        p.Valid1=1
-                        p.Tag1=" ~~ "
-                        
-                        if not igual:
-                            j.Valid1M=' '
-                            j.Tag1M=" ~~ "
-                            j.Value1M='  '
-                            j.Valid2M=' '
-                            j.Tag2M=" ~~ "
-                            j.Value2M='  '
-                            j.contCiclosM=0
-                    if p.Tag2 == j.NombreM:
-                        p.Value2= j.Value1M*j.Value2M
-                        p.Valid2=1
-                        p.Tag2=" ~~ "
+            for p in MulRS:
+                if p.Tag1M == j.NombreM:
+                    p.Value1M= j.Value1M*j.Value2M
+                    p.Valid1M=1
+                    p.Tag1M=" ~~ "
 
-                        j.Valid1M=' '
-                        j.Tag1M=" ~~ "
-                        j.Value1M='  '
-                        j.Valid2M=' '
-                        j.Tag2M=" ~~ "
-                        j.Value2M='  '
-                        j.contCiclosM=0
+                if p.Tag2M == j.NombreM:
+                    p.Value2M= j.Value1M*j.Value2M
+                    p.Valid2M=1
+                    p.Tag2M=" ~~ "
 
-    for v in AdderRS:
-        if (v.Valid1==1 and v.Valid2==1):
-            v.contCiclos+=1
-    for v in MulRS:
-        if (v.Valid1M==1 and v.Valid2M==1): 
-            v.contCiclosM+=1
+
+            for p in AdderRS:                    
+                if p.Tag1 == j.NombreM:
+                    p.Value1= j.Value1M*j.Value2M
+                    p.Valid1=1
+                    p.Tag1=" ~~ "
+                    check = True
+                    
+                if p.Tag2 == j.NombreM:
+                    p.Value2= j.Value1M*j.Value2M
+                    p.Valid2=1
+                    p.Tag2=" ~~ "
+                    check = True
+            #se vacia estacion de reserva de la instruccion que se escribio
+            j.Valid1M=' '
+            j.Tag1M=" ~~ "
+            j.Value1M='  '
+            j.Valid2M=' '
+            j.Tag2M=" ~~ "
+            j.Value2M='  '
+            j.contCiclosM=0
+
+
 
     #--------------------Se decodifica instruccion de suma---------------------------   
     if Decodificar:
@@ -423,10 +348,21 @@ while True:
     if CodigoEnsamblador: 
         fetch = CodigoEnsamblador.pop(0)
         Decodificar.append(fetch)
-
+    if Decodificar:
+        for i in Decodificar:
+            if i!=[]:
+                print("operacion: ")
+                print(i)
+    for v in AdderRS:
+        if (v.Valid1==1 and v.Valid2==1):
+            v.contCiclos+=1
+    for v in MulRS:
+        if (v.Valid1M==1 and v.Valid2M==1): 
+            v.contCiclosM+=1
     print_RAT(RAT)
     print_res(AdderRS,SizeRS,"suma")
-    print_res(MulRS,SizeRS,"multiplicación") 
+    print_res(MulRS,SizeRS,"multiplicación")
+
   
     validos=0
     

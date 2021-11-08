@@ -375,6 +375,7 @@ while True:
                     if RAT[i].Nombre == Decodificar[0][1]:#Se busca registro destino 
                         RAT[i].Valid=0 #
                         RAT[i].Tag = AdderRS[pos].Nombre #se cambia su tag por el nombre de la estacion de reserva de la que esta esperando dato 
+                        RAT[i].Value = ""
                 Decodificar.pop(0)
             else:
                 print("Estacion de reserva de sumas y restas llena")
@@ -416,6 +417,7 @@ while True:
                     if RAT[i].Nombre == Decodificar[0][1]:#Se busca registro destino 
                         RAT[i].Valid=0 #
                         RAT[i].Tag = MulRS[pos].NombreM #se cambia su tag por el nombre de la estacion de reserva de la que esta esperando dato 
+                        RAT[i].Value = ""
                 Decodificar.pop(0)
             else:
                 print("Estacion de reserva de multiplicaciones llena")

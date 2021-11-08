@@ -452,12 +452,12 @@ while True:
             else:
                 print("Estacion de reserva de multiplicaciones llena")
                 
-        
+    """ 
     #----------------fetch---------------------------------------------------------------
     if CodigoEnsamblador: 
         fetch = CodigoEnsamblador.pop(0)
         Decodificar.append(fetch)
-
+    """
   
     validos=0
     print_RAT(RAT)
@@ -479,4 +479,8 @@ while True:
         input("Presione para salir")
         break
     
+    #----------------fetch---------------------------------------------------------------
+    if CodigoEnsamblador: 
+        fetch = CodigoEnsamblador.pop(0)
+        Decodificar.append(fetch)
     clock+=1
